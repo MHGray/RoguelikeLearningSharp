@@ -1,0 +1,7 @@
+C:\Users\backup pc\Desktop\C#\PlayingAround\SimpleGame\SimpleGame\bin\Debug\SimpleGame.exe.config
+C:\Users\backup pc\Desktop\C#\PlayingAround\SimpleGame\SimpleGame\bin\Debug\SimpleGame.exe
+C:\Users\backup pc\Desktop\C#\PlayingAround\SimpleGame\SimpleGame\bin\Debug\SimpleGame.pdb
+C:\Users\backup pc\Desktop\C#\PlayingAround\SimpleGame\SimpleGame\obj\Debug\SimpleGame.csprojAssemblyReference.cache
+C:\Users\backup pc\Desktop\C#\PlayingAround\SimpleGame\SimpleGame\obj\Debug\SimpleGame.csproj.CoreCompileInputs.cache
+C:\Users\backup pc\Desktop\C#\PlayingAround\SimpleGame\SimpleGame\obj\Debug\SimpleGame.exe
+C:\Users\backup pc\Desktop\C#\PlayingAround\SimpleGame\SimpleGame\obj\Debug\SimpleGame.pdb

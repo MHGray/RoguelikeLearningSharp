@@ -3,6 +3,7 @@
 ################################################################################
 
 /.vs/SimpleGame/v15/Server/sqlite3
-/SimpleGame/bin/Debug
-/SimpleGame/obj/Debug
-/.vs/SimpleGame/v15
+/.vs/SimpleGame/v15/.suo
+/.vs/slnx.sqlite
+/.vs/VSWorkspaceState.json
+/.vs/slnx.sqlite-journal

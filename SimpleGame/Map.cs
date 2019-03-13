@@ -151,6 +151,15 @@ namespace SimpleGame
 
 		}
 
+		class Hallway
+		{
+			private static int _num;
+			private int _x;
+			private int _y;
+			
+
+		}
+
 		class Tile
 		{
 			private char _symbol;
@@ -191,6 +200,21 @@ namespace SimpleGame
 			{
 				Game.artist.DrawSymbol(Symbol, X, Y, Color);
 				HasChanged = false;
+			}
+		}
+
+		class Marsh : Tile
+		{
+			
+			
+
+			public Marsh(int x, int y) : base(x,y)
+			{
+				Symbol = ' ';
+				Color = Color.normal;
+				IsWalkable = false;
+				IsExplored = false;
+				HasChanged = true;
 			}
 		}
 	}

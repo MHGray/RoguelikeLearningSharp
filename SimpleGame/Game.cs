@@ -13,6 +13,7 @@ namespace SimpleGame
 
 		static void Main()
 		{
+			
 			map = new Map(WIDTH, HEIGHT);
 			rng = new Random(6);
 			map.Test();

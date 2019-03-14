@@ -7,3 +7,6 @@
 /.vs/slnx.sqlite
 /.vs/VSWorkspaceState.json
 /.vs/slnx.sqlite-journal
+/SimpleGame/bin/Debug
+/SimpleGame/obj/Debug
+/SimpleGame/obj/Release/SimpleGame.csproj.CoreCompileInputs.cache

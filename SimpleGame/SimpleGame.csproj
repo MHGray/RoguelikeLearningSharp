@@ -48,7 +48,9 @@
     <Compile Include="Artist.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="Controller.cs" />
+    <Compile Include="Enemy.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="Map\Dir.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\Tile.cs" />
     <Compile Include="Player.cs" />

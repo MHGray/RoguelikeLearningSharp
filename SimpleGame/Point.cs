@@ -1,4 +1,4 @@
-﻿namespace Simple_Game
+﻿namespace SimpleGame
 {
     /// <summary>
     /// Create a Point

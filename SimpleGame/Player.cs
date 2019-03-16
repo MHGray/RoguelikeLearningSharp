@@ -1,5 +1,4 @@
-﻿using Simple_Game;
-using System;
+﻿using System;
 
 namespace SimpleGame
 {

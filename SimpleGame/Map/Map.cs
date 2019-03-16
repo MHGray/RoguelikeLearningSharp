@@ -1,5 +1,4 @@
-﻿using Simple_Game;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -92,7 +91,7 @@ namespace SimpleGame
             return false;
         }
 
-        public Point GetWalkableTile()
+        public Point GetWalkableTilePos()
         {
             List<Tile> tiles = _tiles.FindAll(t => t.IsWalkable);
             Tile selectedTile = tiles[Game.rng.Next(tiles.Count)];

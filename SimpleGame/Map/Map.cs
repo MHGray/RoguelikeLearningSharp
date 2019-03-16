@@ -1,7 +1,6 @@
 ﻿using Simple_Game;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 
 namespace SimpleGame
@@ -52,6 +51,36 @@ namespace SimpleGame
             tile.Color = color;
             tile.IsWalkable = walkable;
             tile.IsExplored = explored;
+        }
+
+        public void SetTile(int x, int y, TileType type)
+        {
+            Tile tile = _tiles.Find(t => t.x == x && t.y == y);
+            if (tile == null)
+            {
+                return;
+            }
+            switch (type)
+            {
+                case TileType.Blank:
+                    tile.Symbol = ' ';
+                    tile.Color = Color.normal;
+                    tile.IsWalkable = false;
+                    break;
+                case TileType.Wall:
+                    tile.Symbol = '#';
+                    tile.Color = Color.wall;
+                    tile.IsWalkable = false;
+                    break;
+                case TileType.Floor:
+                    tile.Symbol = '∙';
+                    tile.Color = Color.floor;
+                    tile.IsWalkable = true;
+                    break;
+                default:
+                    break;
+            }
+
         }
 
         public bool IsTileWalkable(int x, int y)
@@ -214,11 +243,11 @@ namespace SimpleGame
                     {
                         if (j == 0 || i == 0 || j == Height - 1 || i == Width - 1)
                         {
-                            Game.map.SetTile(i + X, j + Y, '#', Color.wall, false, false);
+                            Game.map.SetTile(i + X, j + Y, TileType.Wall);
                         }
                         else
                         {
-                            Game.map.SetTile(i + X, j + Y, '.', Color.floor, true, false);
+                            Game.map.SetTile(i + X, j + Y, TileType.Floor);
                         }
                     }
                 }
@@ -281,18 +310,18 @@ namespace SimpleGame
                         for (int j = 0; j <= Math.Abs(_yEnd - _yStart); j++)
                         {
                             //Set Tile to floor
-                            Game.map.SetTile(_xStart, _yStart + j, '.', Color.floor, true, false);
+                            Game.map.SetTile(_xStart, _yStart + j, TileType.Floor);
 
                             //Set Neighbors to walls
                             tileToCheck = Game.map.GetTile(_xStart - 1, _yStart + j);
                             if (tileToCheck != null && tileToCheck.Symbol == ' ')
                             {
-                                Game.map.SetTile(_xStart - 1, _yStart + j, '#', Color.wall, false, false);
+                                Game.map.SetTile(_xStart - 1, _yStart + j, TileType.Wall);
                             }
                             tileToCheck = Game.map.GetTile(_xStart + 1, _yStart + j);
                             if (tileToCheck != null && tileToCheck.Symbol == ' ')
                             {
-                                Game.map.SetTile(_xStart + 1, _yStart + j, '#', Color.wall, false, false);
+                                Game.map.SetTile(_xStart + 1, _yStart + j, TileType.Wall);
                             }
                         }
                     }
@@ -301,18 +330,18 @@ namespace SimpleGame
                         //Go Down
                         for (int j = 0; j <= Math.Abs(_yEnd - _yStart); j++)
                         {
-                            Game.map.SetTile(_xStart, _yStart - j, '.', Color.floor, true, false);
+                            Game.map.SetTile(_xStart, _yStart - j, TileType.Floor);
 
                             //Set Neighbors to walls
                             tileToCheck = Game.map.GetTile(_xStart - 1, _yStart - j);
                             if (tileToCheck != null && tileToCheck.Symbol == ' ')
                             {
-                                Game.map.SetTile(_xStart - 1, _yStart - j, '#', Color.wall, false, false);
+                                Game.map.SetTile(_xStart - 1, _yStart - j, TileType.Wall);
                             }
                             tileToCheck = Game.map.GetTile(_xStart + 1, _yStart - j);
                             if (tileToCheck != null && tileToCheck.Symbol == ' ')
                             {
-                                Game.map.SetTile(_xStart + 1, _yStart - j, '#', Color.wall, false, false);
+                                Game.map.SetTile(_xStart + 1, _yStart - j, TileType.Wall);
                             }
                         }
                     }
@@ -323,7 +352,7 @@ namespace SimpleGame
                     adjTiles.ForEach(t => {
                         if(t.Symbol == ' ')
                         {
-                            Game.map.SetTile(t.x, t.y, '#', Color.wall, false, false);
+                            Game.map.SetTile(t.x, t.y, TileType.Wall);
                         }
                     });
 
@@ -334,18 +363,18 @@ namespace SimpleGame
                         for (int i = 0; i <= Math.Abs(_xEnd - _xStart); i++)
                         {
                             //Set tile to floor
-                            Game.map.SetTile(_xStart + i, _yEnd, '.', Color.floor, true, false);
+                            Game.map.SetTile(_xStart + i, _yEnd, TileType.Floor);
 
                             //Set Neighbors to walls
                             tileToCheck = Game.map.GetTile(_xStart + i, _yEnd + 1);
                             if (tileToCheck != null && tileToCheck.Symbol == ' ')
                             {
-                                Game.map.SetTile(_xStart + i, _yEnd + 1, '#', Color.wall, false, false);
+                                Game.map.SetTile(_xStart + i, _yEnd + 1, TileType.Wall);
                             }
                             tileToCheck = Game.map.GetTile(_xStart + i, _yEnd - 1);
                             if (tileToCheck != null && tileToCheck.Symbol == ' ')
                             {
-                                Game.map.SetTile(_xStart + i, _yEnd - 1, '#', Color.wall, false, false);
+                                Game.map.SetTile(_xStart + i, _yEnd - 1, TileType.Wall);
                             }
                         }
                     }
@@ -355,18 +384,18 @@ namespace SimpleGame
                         for (int i = 0; i <= Math.Abs(_xEnd - _xStart); i++)
                         {
                             //Set Tile to floor
-                            Game.map.SetTile(_xStart - i, _yEnd, '.', Color.floor, true, false);
+                            Game.map.SetTile(_xStart - i, _yEnd, TileType.Floor);
 
                             //Set Neighbors to wall
                             Tile tileLeft = Game.map.GetTile(_xStart - i, _yEnd + 1);
                             if (tileLeft != null && tileLeft.Symbol == ' ')
                             {
-                                Game.map.SetTile(_xStart - i, _yEnd + 1, '#', Color.wall, false, false);
+                                Game.map.SetTile(_xStart - i, _yEnd + 1, TileType.Wall);
                             }
                             Tile tileRight = Game.map.GetTile(_xStart - i, _yEnd - 1);
                             if (tileRight != null && tileRight.Symbol == ' ')
                             {
-                                Game.map.SetTile(_xStart - i, _yEnd - 1, '#', Color.wall, false, false);
+                                Game.map.SetTile(_xStart - i, _yEnd - 1, TileType.Wall);
                             }
 
                         }
@@ -378,52 +407,7 @@ namespace SimpleGame
                 }
             }
         }
-
         
-
-        class Tile
-        {
-            private char _symbol;
-            private Color _color;
-
-            public int x;
-            public int y;
-            public char Symbol {
-                get => _symbol;
-                set {
-                    _symbol = value;
-                    HasChanged = true;
-                }
-            }
-            internal Color Color {
-                get => _color;
-                set {
-                    _color = value;
-                    HasChanged = true;
-                }
-            }
-            internal bool IsWalkable { get; set; }
-            internal bool IsExplored { get; set; }
-            internal bool HasChanged { get; set; }
-
-            public Tile(int x, int y)
-            {
-                this.x = x;
-                this.y = y;
-                Symbol = ' ';
-                Color = Color.normal;
-                IsWalkable = false;
-                IsExplored = false;
-                HasChanged = true;
-            }
-
-            public void Draw()
-            {
-                Game.artist.DrawSymbol(Symbol, x, y, Color);
-                HasChanged = false;
-            }
-        }
     }
 
-    
 }

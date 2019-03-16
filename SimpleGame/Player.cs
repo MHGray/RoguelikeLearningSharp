@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Simple_Game;
+using System;
 
 namespace SimpleGame
 {
@@ -80,7 +81,8 @@ namespace SimpleGame
 				case ConsoleKey.B:
 					break;
 				case ConsoleKey.C:
-					break;
+                    Game.artist.Clear();
+                    break;
 				case ConsoleKey.D:
 					break;
 				case ConsoleKey.E:
@@ -147,57 +149,75 @@ namespace SimpleGame
 			//Clear current position in artist
 			Game.map.DrawTile(_x, _y);
 
+            int moveX = _x;
+            int moveY = _y;
+
 			switch (dir)
 			{
 				case "u":
-					_y--;
+					moveY--;
 					break;
 				case "d":
-					_y++;
+					moveY++;
 					break;
 				case "l":
-					_x--;
+					moveX--;
 					break;
 				case "r":
-					_x++;
+					moveX++;
 					break;
 				case "ul":
-					_y--;
-					_x--;
+					moveY--;
+					moveX--;
 					break;
 				case "ur":
-					_y--;
-					_x++;
+					moveY--;
+					moveX++;
 					break;
 				case "dl":
-					_y++;
-					_x--;
+					moveY++;
+					moveX--;
 					break;
 				case "dr":
-					_y++;
-					_x++;
+					moveY++;
+					moveX++;
 					break;
 				case "wait":
 					break;
 				default:
 					break;
 			}
-			if(_x < 0)
+
+            //Check against edge of screen
+			if(moveX < 0)
 			{
-				_x = 0;
-			}else if(_x > Game.WIDTH - 1)
+				moveX = 0;
+			}else if(moveX > Game.WIDTH - 1)
 			{
-				_x = Game.WIDTH - 1;
+				moveX = Game.WIDTH - 1;
 			}
-			if (_y < 0)
+			if (moveY < 0)
 			{
-				_y = 0;
+				moveY = 0;
 			}
-			else if (_y > Game.HEIGHT - 1)
+			else if (moveY > Game.HEIGHT - 1)
 			{
-				_y = Game.HEIGHT - 1;
+				moveY = Game.HEIGHT - 1;
 			}
+
+            //Check to make sure position is walkable
+            if (Game.map.IsTileWalkable(moveX, moveY))
+            {
+                _x = moveX;
+                _y = moveY;
+            }
 		}
+
+        public void SetPos(Point pos)
+        {
+            _x = pos.X;
+            _y = pos.Y;
+        }
 
 		public void Draw()
 		{

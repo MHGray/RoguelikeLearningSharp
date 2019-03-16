@@ -17,6 +17,7 @@ namespace SimpleGame
 			map = new Map(WIDTH, HEIGHT);
 			rng = new Random(6);
 			map.Test();
+            player.SetPos(Game.map.GetWalkableTile());
 			artist.Clear();
 			artist.DrawRect('#', 10, 10, 10, 10, Color.normal);
 			artist.DrawRect('#', 20, 20, 10, 10, Color.normal);
@@ -27,10 +28,6 @@ namespace SimpleGame
 		public static void Update()
 		{
 			ConsoleKeyInfo key = Console.ReadKey(true);
-			if(key.Key == ConsoleKey.C)
-			{
-				artist.Clear();
-			}
 			player.Update(key);
 			Draw();
 		}

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Simple_Game;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -51,6 +52,24 @@ namespace SimpleGame
             tile.Color = color;
             tile.IsWalkable = walkable;
             tile.IsExplored = explored;
+        }
+
+        public bool IsTileWalkable(int x, int y)
+        {
+            if (GetTile(x,y).IsWalkable)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public Point GetWalkableTile()
+        {
+            List<Tile> tiles = _tiles.FindAll(t => t.IsWalkable);
+            Tile selectedTile = tiles[Game.rng.Next(tiles.Count)];
+            Point point = new Point(selectedTile.x, selectedTile.y);
+            return point;
+
         }
 
         Tile GetTile(Point p)
@@ -360,20 +379,7 @@ namespace SimpleGame
             }
         }
 
-        /// <summary>
-        /// Create a Point
-        /// </summary>
-		class Point
-        {
-            public readonly int X;
-            public readonly int Y;
-
-            public Point(int x, int y)
-            {
-                X = x;
-                Y = y;
-            }
-        }
+        
 
         class Tile
         {
@@ -418,4 +424,6 @@ namespace SimpleGame
             }
         }
     }
+
+    
 }

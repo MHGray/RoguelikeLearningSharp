@@ -6,21 +6,18 @@ namespace SimpleGame
 	class Game
 	{
 		public static Random rng;
-        public static int seed;
 		public const int WIDTH = 120;
 		public const int HEIGHT = 30;
 		public static Artist artist = new Artist(WIDTH,HEIGHT);
 		public static Player player = new Player();
 		public static Map map;
         public static List<Enemy> Enemies { get; set; } = new List<Enemy>();
+        public static AStar aStar = new AStar();
 
 		static void Main()
 		{			
 			map = new Map(WIDTH, HEIGHT);
-			rng = new Random();
-            seed = rng.Next();
-            rng = new Random(seed);
-            Console.Title = seed.ToString();
+            rng = new Random(6);
 			map.Test();
             player.SetPos(Game.map.GetWalkableTilePos());
             for (int i = 0; i < 25; i++)
@@ -46,9 +43,10 @@ namespace SimpleGame
 		public static void Draw()
 		{
 			map.Draw();
-            player.Draw();
+            
             Enemies.ForEach(e => e.Draw());
-			artist.Draw();
+            player.Draw();
+            artist.Draw();
 
 			Update();
 		}

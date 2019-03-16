@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using static SimpleGame.AStar;
 
 namespace SimpleGame
 {
@@ -30,6 +31,11 @@ namespace SimpleGame
             Symbol = '?';
         }
 
+        public Point GetPos()
+        {
+            return new Point(X, Y);
+        }
+
         public virtual void Draw()
         {
             Game.artist.DrawSymbol(Symbol, X, Y, Color);
@@ -53,6 +59,45 @@ namespace SimpleGame
         {
             Color = Color.goblin;
             Symbol = 'g';
+        }
+
+        public void MoveTowardsPlayer()
+        {
+            Point start = this.GetPos();
+            Point end = Game.player.GetPos();
+
+
+
+            List<Point> path = Game.aStar.Find(start, end,
+                //h
+                (Point p) =>
+                {
+                    if (Game.map.IsTileWalkable(p))
+                    {
+                        return Math.Abs(p.X - end.X) +
+                           Math.Abs(p.Y - end.Y);
+                    }
+                    else
+                    {
+                        return 999999;
+                    }                    
+                },
+                //getNeighbors
+                (Point p) =>
+                {
+                    List<APoint> points = new List<APoint>();
+                    Game.map.GetAdjTiles(p).ForEach(point => points.Add(new APoint (point)));
+                    return points;
+                });
+
+            if(path.Count > 1)
+            {
+                X = path[1].X;
+                Y = path[1].Y;
+            }
+            
+
+            return;
         }
 
         public override void Update()
@@ -98,6 +143,8 @@ namespace SimpleGame
                 default:
                     break;
             }
+
+            MoveTowardsPlayer();
 
             if(!Game.map.IsTileWalkable(X, Y))
             {

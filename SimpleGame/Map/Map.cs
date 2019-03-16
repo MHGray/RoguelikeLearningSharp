@@ -91,6 +91,15 @@ namespace SimpleGame
             return false;
         }
 
+        public bool IsTileWalkable(Point p)
+        {
+            if (GetTile(p.X, p.Y).IsWalkable)
+            {
+                return true;
+            }
+            return false;
+        }
+
         public Point GetWalkableTilePos()
         {
             List<Tile> tiles = _tiles.FindAll(t => t.IsWalkable);
@@ -118,7 +127,7 @@ namespace SimpleGame
             {
                 for (int i = -1; i <= 1; i++)
                 {
-                    Tile tileToCheck = GetTile(x + i, y + i);
+                    Tile tileToCheck = GetTile(x + i, y + j);
                     if(tileToCheck != null)
                     {
                         tiles.Add(tileToCheck);
@@ -126,6 +135,30 @@ namespace SimpleGame
                 }
             }
             return tiles;
+        }
+
+        public List<Point> GetAdjTiles(Point p)
+        {
+            List<Point> points = new List<Point>();
+
+            for (int j = -1; j <= 1; j++)
+            {
+                for (int i = -1; i <= 1; i++)
+                {
+                    if (i == 0 && j == 0)
+                    {
+                        continue;
+                    }
+                    Tile tileToCheck = GetTile(p.X + i, p.Y + j);
+                    if (tileToCheck != null)
+                    {
+                        if(tileToCheck.IsWalkable)
+                            points.Add(new Point(tileToCheck.x, tileToCheck.y));
+                    }
+                }
+            }
+
+            return points;
         }
 
         public void Test()

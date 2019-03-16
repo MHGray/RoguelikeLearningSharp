@@ -143,6 +143,11 @@ namespace SimpleGame
 			}
 		}
 
+        public Point GetPos()
+        {
+            return new Point(_x, _y);
+        }
+
 		public void Move(string dir)
 		{
 			//Clear current position in artist

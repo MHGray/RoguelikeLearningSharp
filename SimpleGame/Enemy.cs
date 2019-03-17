@@ -85,8 +85,8 @@ namespace SimpleGame
                 //getNeighbors
                 (Point p) =>
                 {
-                    List<APoint> points = new List<APoint>();
-                    Game.map.GetAdjTiles(p).ForEach(point => points.Add(new APoint (point)));
+                    List<Point> points = new List<Point>();
+                    Game.map.GetAdjTiles(p).ForEach(point => points.Add(new Point (point)));
                     return points;
                 });
 

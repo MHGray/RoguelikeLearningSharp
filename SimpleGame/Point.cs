@@ -7,6 +7,10 @@
     {
         public int X;
         public int Y;
+        public int F = 0;
+        public int G = 0;
+        public int H = 0;
+        public Point Parent = null;
 
         public Point(int x, int y)
         {

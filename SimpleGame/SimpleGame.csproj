@@ -45,6 +45,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Actor.cs" />
     <Compile Include="Artist.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="Controller.cs" />

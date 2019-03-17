@@ -10,17 +10,17 @@ namespace SimpleGame
 
     class AStar{
 
-        public List<Point> Find(Point pStart, Point pEnd, Func<Point,int> h, Func<Point, List<APoint>> getNeighbors)
+        public List<Point> Find(Point pStart, Point pEnd, Func<Point,int> h, Func<Point, List<Point>> getNeighbors)
         {
             //List<Point> finalPath = new List<Point>();
 
-            APoint start = new APoint(pStart);
+            Point start = new Point(pStart);
             start.H = h(start);
             start.G = start.H +start.G;
-            APoint end = new APoint(pEnd);
+            Point end = new Point(pEnd);
 
-            List<APoint> openList = new List<APoint>();
-            List<APoint> closedList = new List<APoint>();
+            List<Point> openList = new List<Point>();
+            List<Point> closedList = new List<Point>();
 
             openList.Add(start);
 
@@ -38,7 +38,9 @@ namespace SimpleGame
                 var curPos = openList[next];
 
                 //check if at end
-                if((curPos.X == end.X && curPos.Y == end.Y) || openList.Count > 5)
+                //Also close if the closedList count gets too high. This gives 'approximate'
+                //path reasonably well
+                if((curPos.X == end.X && curPos.Y == end.Y) || closedList.Count > 10)
                 {
                     var cur = curPos;
                     List<Point> finalPath = new List<Point>();
@@ -90,27 +92,6 @@ namespace SimpleGame
             }
 
             return null;
-
-        }
-
-        public class APoint : Point
-        {
-            public int F = 0;
-            public int G = 0;
-            public int H = 0;
-            public APoint Parent = null;
-
-            public APoint(int x, int y) : base(x, y)
-            {
-                X = x;
-                Y = y;
-            }
-
-            public APoint(Point p):base(p)
-            {
-                X = p.X;
-                Y = p.Y;
-            }
 
         }
 

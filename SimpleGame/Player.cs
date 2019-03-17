@@ -4,10 +4,10 @@ namespace SimpleGame
 {
 	public class Player
 	{
-		char _symbol = '@';
-		Color _color = new Color(ConsoleColor.Yellow, ConsoleColor.Black);
-		private int _x = 0;
-		private int _y = 0;
+		public char Symbol = '@';
+		public Color Color = new Color(ConsoleColor.Yellow, ConsoleColor.Black);
+		public int X = 0;
+		public int Y = 0;
 
 		public void Update(ConsoleKeyInfo input)
 		{
@@ -145,16 +145,16 @@ namespace SimpleGame
 
         public Point GetPos()
         {
-            return new Point(_x, _y);
+            return new Point(X, Y);
         }
 
 		public void Move(string dir)
 		{
 			//Clear current position in artist
-			Game.map.DrawTile(_x, _y);
+			Game.map.DrawTile(X, Y);
 
-            int moveX = _x;
-            int moveY = _y;
+            int moveX = X;
+            int moveY = Y;
 
 			switch (dir)
 			{
@@ -212,20 +212,20 @@ namespace SimpleGame
             //Check to make sure position is walkable
             if (Game.map.IsTileWalkable(moveX, moveY))
             {
-                _x = moveX;
-                _y = moveY;
+                X = moveX;
+                Y = moveY;
             }
 		}
 
         public void SetPos(Point pos)
         {
-            _x = pos.X;
-            _y = pos.Y;
+            X = pos.X;
+            Y = pos.Y;
         }
 
 		public void Draw()
 		{
-			Game.artist.DrawSymbol(_symbol, _x, _y, _color);
+			Game.artist.DrawSymbol(Symbol, X, Y, Color);
 		}
 	}
 }

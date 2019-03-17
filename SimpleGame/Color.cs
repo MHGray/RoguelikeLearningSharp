@@ -2,7 +2,7 @@
 
 namespace SimpleGame
 {
-	class Color
+	public class Color
 	{
 		public static Color normal = new Color(ConsoleColor.White,ConsoleColor.Black);
 		public static Color player = new Color(ConsoleColor.Yellow, ConsoleColor.Black);

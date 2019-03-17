@@ -45,6 +45,7 @@ namespace SimpleGame
 				case ConsoleKey.Tab:
 					break;
 				case ConsoleKey.Enter:
+                    Game.dice.Roll("1d6");
 					break;
 				case ConsoleKey.Escape:
 					break;

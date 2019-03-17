@@ -13,6 +13,7 @@ namespace SimpleGame
 		public static Map map;
         public static List<Enemy> Enemies { get; set; } = new List<Enemy>();
         public static AStar aStar = new AStar();
+        public static Dice dice = new Dice();
 
 		static void Main()
 		{			

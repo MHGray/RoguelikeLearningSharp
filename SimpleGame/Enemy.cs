@@ -7,13 +7,8 @@ using static SimpleGame.AStar;
 
 namespace SimpleGame
 {
-    class Enemy
+    class Enemy : Actor
     {
-        public int X { get; set; }
-        public int Y { get; set; }
-        public Color Color { get; set; }
-        public char Symbol { get; set; }
-
         public Enemy()
         {
             Point pos = Game.map.GetWalkableTilePos();

@@ -2,12 +2,14 @@
 
 namespace SimpleGame
 {
-	public class Player
+	public class Player : Actor
 	{
-		public char Symbol = '@';
-		public Color Color = new Color(ConsoleColor.Yellow, ConsoleColor.Black);
-		public int X = 0;
-		public int Y = 0;
+        public Player()
+        {
+            Symbol = '@';
+            Color = Color.player;
+            HP = 8;
+        }
 
 		public void Update(ConsoleKeyInfo input)
 		{

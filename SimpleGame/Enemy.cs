@@ -100,14 +100,8 @@ namespace SimpleGame
             return;
         }
 
-        public override void Update()
+        public void RandomMove()
         {
-            //Clear self on Map
-            Game.map.DrawTile(X, Y);
-
-            //attempt move
-            Point curPos = new Point(X, Y);
-
             switch ((Dir)Game.rng.Next(1, 10))
             {
                 case Dir.u:
@@ -143,6 +137,17 @@ namespace SimpleGame
                 default:
                     break;
             }
+        }
+
+        public override void Update()
+        {
+            //Clear self on Map
+            Game.map.DrawTile(X, Y);
+
+            //attempt move
+            Point curPos = new Point(X, Y);
+
+
 
             MoveTowardsPlayer();
 

@@ -21,7 +21,7 @@ namespace SimpleGame
             Console.WindowHeight = HEIGHT;
 			map = new Map(100, 25);
             stats = new StatConsole(100, 5);
-            rng = new Random();
+            rng = new Random(6);
 			map.Test();
             player = new Player();
             player.SetPos(map.GetWalkableTilePos());

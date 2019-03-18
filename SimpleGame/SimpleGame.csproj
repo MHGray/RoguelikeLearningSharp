@@ -55,6 +55,7 @@
     <Compile Include="Map\Dir.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\Tile.cs" />
+    <Compile Include="MessageConsole.cs" />
     <Compile Include="Pathfinding.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Point.cs" />

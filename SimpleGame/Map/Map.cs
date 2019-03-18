@@ -37,13 +37,13 @@ namespace SimpleGame
 
         public void DrawTile(int x, int y)
         {
-            Tile tile = _tiles.Find(t => t.x == x && t.y == y);
+            Tile tile = _tiles.Find(t => t.Pos.X == x && t.Pos.Y == y);
             tile.HasChanged = true;
         }
 
         public void SetTile(int x, int y, char symbol, Color color, bool walkable, bool explored)
         {
-            Tile tile = _tiles.Find(t => t.x == x && t.y == y);
+            Tile tile = _tiles.Find(t => t.Pos.X == x && t.Pos.Y == y);
             if (tile == null)
             {
                 return;
@@ -56,7 +56,7 @@ namespace SimpleGame
 
         public void SetTile(int x, int y, TileType type)
         {
-            Tile tile = _tiles.Find(t => t.x == x && t.y == y);
+            Tile tile = _tiles.Find(t => t.Pos.X == x && t.Pos.Y == y);
             if (tile == null)
             {
                 return;
@@ -106,19 +106,19 @@ namespace SimpleGame
         {
             List<Tile> tiles = _tiles.FindAll(t => t.IsWalkable);
             Tile selectedTile = tiles[Game.rng.Next(tiles.Count)];
-            Point point = new Point(selectedTile.x, selectedTile.y);
+            Point point = new Point(selectedTile.Pos.X, selectedTile.Pos.Y);
             return point;
 
         }
 
         Tile GetTile(Point p)
         {
-            return _tiles.Find(t => t.x == p.X && t.y == p.Y);
+            return _tiles.Find(t => t.Pos.X == p.X && t.Pos.Y == p.Y);
         }
 
         Tile GetTile(int x, int y)
         {
-            return _tiles.Find(t => t.x == x && t.y == y);
+            return _tiles.Find(t => t.Pos.X == x && t.Pos.Y == y);
         }
 
         List<Tile> GetAdjTiles(int x, int y)
@@ -139,7 +139,7 @@ namespace SimpleGame
             return tiles;
         }
 
-        public List<Point> GetAdjTiles(Point p)
+        public List<Point> GetAdjPoints(Point p)
         {
             List<Point> points = new List<Point>();
 
@@ -155,7 +155,7 @@ namespace SimpleGame
                     if (tileToCheck != null)
                     {
                         if(tileToCheck.IsWalkable)
-                            points.Add(new Point(tileToCheck.x, tileToCheck.y));
+                            points.Add(tileToCheck.Pos);
                     }
                 }
             }
@@ -386,7 +386,7 @@ namespace SimpleGame
                     adjTiles.ForEach(t => {
                         if(t.Symbol == ' ')
                         {
-                            Game.map.SetTile(t.x, t.y, TileType.Wall);
+                            Game.map.SetTile(t.Pos.X, t.Pos.Y, TileType.Wall);
                         }
                     });
 

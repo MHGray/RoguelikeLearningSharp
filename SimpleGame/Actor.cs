@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace SimpleGame
+﻿namespace SimpleGame
 {
     public abstract class Actor
     {
@@ -12,7 +7,7 @@ namespace SimpleGame
         public int X;
         public int Y;
 
-        public string Str = "1d3";
+        public string Str = "1d6";
         public string Con = "1d2";
         public int HP = 3;
         public int HPMax = 3;

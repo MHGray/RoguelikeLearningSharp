@@ -6,15 +6,14 @@ namespace SimpleGame
 	{
         private int _hp = 0;
         private int _hpMax = 0;
-        private int _str = 0;
-        private int _con = 0;
+        private string _str = "1d6";
+        private string _con = "1d2";
 
         public new int HP {
             get { return _hp; }
             set {
                 _hp = value;
                 Game.stats.Draw();
-                
             }
         }
         public new int HPMax {
@@ -22,23 +21,20 @@ namespace SimpleGame
             set {
                 _hpMax = value;
                 Game.stats.Draw();
-
             }
         }
-        public new int Con {
+        public new string Con {
             get { return _con; }
             set {
                 _con = value;
                 Game.stats.Draw();
-
             }
         }
-        public new int Str {
+        public new string Str {
             get { return _str; }
             set {
                 _str = value;
                 Game.stats.Draw();
-
             }
         }
 

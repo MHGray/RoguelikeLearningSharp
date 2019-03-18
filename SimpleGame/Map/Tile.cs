@@ -5,8 +5,11 @@
         private char _symbol;
         private Color _color;
 
-        public int x;
-        public int y;
+        //public int x;
+        //public int y;
+
+        public Point Pos = new Point();
+
         public char Symbol {
             get => _symbol;
             set {
@@ -27,8 +30,8 @@
 
         public Tile(int x, int y)
         {
-            this.x = x;
-            this.y = y;
+            Pos.X = x;
+            Pos.Y = y;
             Symbol = ' ';
             Color = Color.normal;
             IsWalkable = false;
@@ -38,8 +41,8 @@
 
         public Tile(int x, int y, TileType type)
         {
-            this.x = x;
-            this.y = y;
+            Pos.X = x;
+            Pos.Y = y;
             switch (type)
             {
                 case TileType.Blank:
@@ -67,7 +70,7 @@
 
         public void Draw()
         {
-            Game.map.Artist.DrawSymbol(Symbol, x, y, Color);
+            Game.map.Artist.DrawSymbol(Symbol, Pos.X, Pos.Y, Color);
             HasChanged = false;
         }
     }

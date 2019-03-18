@@ -23,5 +23,11 @@
             X = p.X;
             Y = p.Y;
         }
+
+        public Point()
+        {
+            X = 0;
+            Y = 0;
+        }
     }
 }

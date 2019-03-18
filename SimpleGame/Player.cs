@@ -4,11 +4,50 @@ namespace SimpleGame
 {
 	public class Player : Actor
 	{
+        private int _hp = 0;
+        private int _hpMax = 0;
+        private int _str = 0;
+        private int _con = 0;
+
+        public new int HP {
+            get { return _hp; }
+            set {
+                _hp = value;
+                Game.stats.Draw();
+                
+            }
+        }
+        public new int HPMax {
+            get { return _hpMax; }
+            set {
+                _hpMax = value;
+                Game.stats.Draw();
+
+            }
+        }
+        public new int Con {
+            get { return _con; }
+            set {
+                _con = value;
+                Game.stats.Draw();
+
+            }
+        }
+        public new int Str {
+            get { return _str; }
+            set {
+                _str = value;
+                Game.stats.Draw();
+
+            }
+        }
+
         public Player()
         {
             Symbol = '@';
             Color = Color.player;
-            HP = 8;
+            _hp = 8;
+            _hpMax = 8;
         }
 
 		public void Update(ConsoleKeyInfo input)
@@ -45,6 +84,7 @@ namespace SimpleGame
 					Move("ur");
 					break;
 				case ConsoleKey.Tab:
+                    HP--;
 					break;
 				case ConsoleKey.Enter:
                     Game.dice.Roll("1d6");

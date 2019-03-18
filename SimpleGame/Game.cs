@@ -8,25 +8,28 @@ namespace SimpleGame
 		public static Random rng;
 		public const int WIDTH = 120;
 		public const int HEIGHT = 30;
-		//public static Artist artist;
-		public static Player player = new Player();
+		public static Player player;
 		public static Map map;
         public static List<Enemy> Enemies { get; set; } = new List<Enemy>();
         public static AStar aStar = new AStar();
         public static Dice dice = new Dice();
+        public static StatConsole stats;
 
-		static void Main()
+        static void Main()
 		{			
 			map = new Map(100, 25);
+            stats = new StatConsole(100, 5);
             rng = new Random();
 			map.Test();
-            player.SetPos(Game.map.GetWalkableTilePos());
+            player = new Player();
+            player.SetPos(map.GetWalkableTilePos());
             for (int i = 0; i < 25; i++)
             {
                 Enemies.Add(new Goblin());
             }
             
 			map.Artist.Clear();
+            stats.Draw();
 
 			Draw();
 		}

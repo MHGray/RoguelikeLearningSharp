@@ -8,6 +8,8 @@ namespace SimpleGame
 	{
 		private readonly int _width;
 		private readonly int _height;
+        private readonly int _widthOff = 0;
+        private readonly int _heightOff = 0;
 		private List<Pixel> _pixels = new List<Pixel>();
 
 		#region Constructor		
@@ -29,13 +31,30 @@ namespace SimpleGame
 				}
 			}
 		}
-		#endregion
 
-		/// <summary>
-		/// Completely clears the screen. Inefficient and causes screen flickering
-		/// if it is done a lot.
-		/// </summary>
-		public void Clear()
+        public Artist(int width, int height, int widthOff, int heightOff)
+        {
+            Console.CursorVisible = false;
+            _width = width;
+            _height = height;
+            _widthOff = widthOff;
+            _heightOff = heightOff;
+
+            for (int j = 0; j < _height; j++)
+            {
+                for (int i = 0; i < _width; i++)
+                {
+                    _pixels.Add(new Pixel(i, j, ' ', Color.normal));
+                }
+            }
+        }
+        #endregion
+
+        /// <summary>
+        /// Completely clears the screen. Inefficient and causes screen flickering
+        /// if it is done a lot.
+        /// </summary>
+        public void Clear()
 		{
 			Console.SetCursorPosition(0, 0);
 			//Console.WindowWidth = Game.WIDTH;
@@ -92,7 +111,7 @@ namespace SimpleGame
 		private void DrawPixel(Pixel pixel)
 		{
 			SetColor(pixel.Color);
-			Console.SetCursorPosition(pixel.X, pixel.Y);
+            Console.SetCursorPosition(pixel.X + _widthOff, pixel.Y + _heightOff);
 			Console.Write(pixel.Symbol);
 		}
 
@@ -115,6 +134,14 @@ namespace SimpleGame
 			Console.ForegroundColor = color.Front;
 			Console.BackgroundColor = color.Back;
 		}
+
+        public void WriteLine(string str, int x, int y)
+        {
+            for (int i = 0; i < str.Length; i++)
+            {
+                DrawSymbol(str[i], 0 + i, y, Color.normal);
+            }
+        }
 
 		private class Pixel
 		{

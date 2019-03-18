@@ -15,5 +15,6 @@ namespace SimpleGame
         public string Str = "1d3";
         public string Con = "1d2";
         public int HP = 3;
+        public int HPMax = 3;
     }
 }

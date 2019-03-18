@@ -40,7 +40,7 @@ namespace SimpleGame
                 //check if at end
                 //Also close if the closedList count gets too high. This gives 'approximate'
                 //path reasonably well
-                if((curPos.X == end.X && curPos.Y == end.Y) )//|| closedList.Count > 10)
+                if((curPos.X == end.X && curPos.Y == end.Y) || closedList.Count > 10)
                 {
                     var cur = curPos;
                     List<Point> finalPath = new List<Point>();

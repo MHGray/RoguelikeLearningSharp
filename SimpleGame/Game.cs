@@ -16,7 +16,9 @@ namespace SimpleGame
         public static StatConsole stats;
 
         static void Main()
-		{			
+		{
+            Console.WindowWidth = WIDTH;
+            Console.WindowHeight = HEIGHT;
 			map = new Map(100, 25);
             stats = new StatConsole(100, 5);
             rng = new Random();

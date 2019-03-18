@@ -66,13 +66,13 @@ namespace SimpleGame
             }
 
             //Test to see what is actually getting rolled
-            Game.artist.DrawRectFill(' ', 1, 1, 12, 1, Color.normal);
-            Game.artist.DrawRect('∙', 0, 0, 14, 3, Color.normal);
+            Game.map.Artist.DrawRectFill(' ', 1, 1, 12, 1, Color.normal);
+            Game.map.Artist.DrawRect('∙', 0, 0, 14, 3, Color.normal);
 
             string totalWord = total.ToString();
             for (int i = 0; i < totalWord.Length; i++)
             {
-                Game.artist.DrawSymbol(totalWord[i], 1 + i, 1, Color.normal);
+                Game.map.Artist.DrawSymbol(totalWord[i], 1 + i, 1, Color.normal);
             }
 
             return total;

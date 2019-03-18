@@ -9,16 +9,18 @@ namespace SimpleGame
         private List<Tile> _tiles = new List<Tile>();
         private List<Room> _rooms = new List<Room>();
         private List<Hallway> _hallways = new List<Hallway>();
-        private int Width { get; set; }
-        private int Height { get; set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
+        public Artist Artist;
 
         public Map(int width, int height)
         {
             Width = width;
             Height = height;
-            for (int j = 0; j < height; j++)
+            Artist = new Artist(Width,Height);
+            for (int j = 0; j < Height; j++)
             {
-                for (int i = 0; i < width; i++)
+                for (int i = 0; i < Width; i++)
                 {
                     _tiles.Add(new Tile(i, j));
                 }
@@ -171,10 +173,10 @@ namespace SimpleGame
 
             for (int i = 0; i < _rooms.Count - 1; i++)
             {
-                int startX = Game.rng.Next(_rooms[i].X + 1, _rooms[i].X + _rooms[i].Width);
-                int startY = Game.rng.Next(_rooms[i].Y + 1, _rooms[i].Y + _rooms[i].Height);
-                int endX = Game.rng.Next(_rooms[i + 1].X + 1, _rooms[i + 1].X + _rooms[i + 1].Width);
-                int endY = Game.rng.Next(_rooms[i + 1].Y + 1, _rooms[i + 1].Y + _rooms[i + 1].Height);
+                int startX = Game.rng.Next(_rooms[i].X + 1, _rooms[i].X + _rooms[i].Width-1);
+                int startY = Game.rng.Next(_rooms[i].Y + 1, _rooms[i].Y + _rooms[i].Height-1);
+                int endX = Game.rng.Next(_rooms[i + 1].X + 1, _rooms[i + 1].X + _rooms[i + 1].Width-1);
+                int endY = Game.rng.Next(_rooms[i + 1].Y + 1, _rooms[i + 1].Y + _rooms[i + 1].Height-1);
                 Point start = new Point(startX, startY);
                 Point end = new Point(endX, endY);
                 _hallways.Add(new Hallway(start, end));
@@ -193,20 +195,20 @@ namespace SimpleGame
                 //Try 10 times to make a room that fits
                 while (counter < 10)
                 {
-                    int x = Game.rng.Next(Game.WIDTH);
-                    int y = Game.rng.Next(Game.HEIGHT);
+                    int x = Game.rng.Next(Width);
+                    int y = Game.rng.Next(Height);
                     int width = Game.rng.Next(10) + 4;
                     int height = Game.rng.Next(9) + 4;
 
                     //Nudge room back on to the screen 
                     //if it is too far over
-                    if (x + width > Game.WIDTH)
+                    if (x + width > Width)
                     {
-                        x = Game.WIDTH - width - 1;
+                        x = Width - width - 1;
                     }
-                    if (y + height > Game.HEIGHT)
+                    if (y + height > Height)
                     {
-                        y = Game.HEIGHT - height - 1;
+                        y = Height - height - 1;
                     }
 
                     //Create Test Room

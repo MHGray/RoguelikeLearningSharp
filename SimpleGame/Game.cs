@@ -8,7 +8,7 @@ namespace SimpleGame
 		public static Random rng;
 		public const int WIDTH = 120;
 		public const int HEIGHT = 30;
-		public static Artist artist = new Artist(WIDTH,HEIGHT);
+		//public static Artist artist;
 		public static Player player = new Player();
 		public static Map map;
         public static List<Enemy> Enemies { get; set; } = new List<Enemy>();
@@ -17,8 +17,8 @@ namespace SimpleGame
 
 		static void Main()
 		{			
-			map = new Map(WIDTH, HEIGHT);
-            rng = new Random(6);
+			map = new Map(100, 25);
+            rng = new Random();
 			map.Test();
             player.SetPos(Game.map.GetWalkableTilePos());
             for (int i = 0; i < 25; i++)
@@ -26,9 +26,7 @@ namespace SimpleGame
                 Enemies.Add(new Goblin());
             }
             
-			artist.Clear();
-			artist.DrawRect('#', 10, 10, 10, 10, Color.normal);
-			artist.DrawRect('#', 20, 20, 10, 10, Color.normal);
+			map.Artist.Clear();
 
 			Draw();
 		}
@@ -47,7 +45,7 @@ namespace SimpleGame
             
             Enemies.ForEach(e => e.Draw());
             player.Draw();
-            artist.Draw();
+            map.Artist.Draw();
 
 			Update();
 		}

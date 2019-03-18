@@ -64,26 +64,26 @@ namespace SimpleGame
 				case ConsoleKey.A:
 					for(int i = 0; i < 10; i++)
 					{
-						int x = Game.rng.Next(Game.WIDTH);
-						int y = Game.rng.Next(Game.HEIGHT);
+						int x = Game.rng.Next(Game.map.Width);
+						int y = Game.rng.Next(Game.map.Height);
 						int width = Game.rng.Next(20) + 2;
 						int height = Game.rng.Next(10) + 2;
-						if (x + width > Game.WIDTH)
+						if (x + width > Game.map.Width)
 						{
-							x = Game.WIDTH - width - 1;
+							x = Game.map.Width - width - 1;
 						}
-						if (y + height > Game.HEIGHT)
+						if (y + height > Game.map.Height)
 						{
-							y = Game.HEIGHT - height - 1;
+							y = Game.map.Height- height - 1;
 						}
 
-						Game.artist.DrawRect('#', x, y, width, height, Color.normal);
+						Game.map.Artist.DrawRect('#', x, y, width, height, Color.normal);
 					}
 					break;
 				case ConsoleKey.B:
 					break;
 				case ConsoleKey.C:
-                    Game.artist.Clear();
+                    Game.map.Artist.Clear();
                     break;
 				case ConsoleKey.D:
 					break;
@@ -199,17 +199,17 @@ namespace SimpleGame
 			if(moveX < 0)
 			{
 				moveX = 0;
-			}else if(moveX > Game.WIDTH - 1)
+			}else if(moveX > Game.map.Width - 1)
 			{
-				moveX = Game.WIDTH - 1;
+				moveX = Game.map.Width - 1;
 			}
 			if (moveY < 0)
 			{
 				moveY = 0;
 			}
-			else if (moveY > Game.HEIGHT - 1)
+			else if (moveY > Game.map.Height - 1)
 			{
-				moveY = Game.HEIGHT - 1;
+				moveY = Game.map.Height - 1;
 			}
 
             //Check to make sure position is walkable
@@ -228,7 +228,7 @@ namespace SimpleGame
 
 		public void Draw()
 		{
-			Game.artist.DrawSymbol(Symbol, X, Y, Color);
+			Game.map.Artist.DrawSymbol(Symbol, X, Y, Color);
 		}
 	}
 }

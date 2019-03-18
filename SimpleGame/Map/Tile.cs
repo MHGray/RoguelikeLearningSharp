@@ -67,7 +67,7 @@
 
         public void Draw()
         {
-            Game.artist.DrawSymbol(Symbol, x, y, Color);
+            Game.map.Artist.DrawSymbol(Symbol, x, y, Color);
             HasChanged = false;
         }
     }

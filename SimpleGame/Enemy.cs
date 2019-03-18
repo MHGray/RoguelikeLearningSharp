@@ -33,7 +33,7 @@ namespace SimpleGame
 
         public virtual void Draw()
         {
-            Game.artist.DrawSymbol(Symbol, X, Y, Color);
+            Game.map.Artist.DrawSymbol(Symbol, X, Y, Color);
         }
 
         public virtual void Update()
@@ -67,15 +67,15 @@ namespace SimpleGame
                 //h
                 (Point p) =>
                 {
-                    if (Game.map.IsTileWalkable(p))
-                    {
+                   // if (Game.map.IsTileWalkable(p))
+                   // {
                         return Math.Abs(p.X - end.X) +
                            Math.Abs(p.Y - end.Y);
-                    }
-                    else
-                    {
-                        return 999999;
-                    }                    
+                  //  }
+                   // else
+                   // {
+                   //     return 999999;
+                   // }                    
                 },
                 //getNeighbors
                 (Point p) =>
@@ -155,7 +155,7 @@ namespace SimpleGame
 
         public override void Draw()
         {
-            Game.artist.DrawSymbol(Symbol, X, Y, Color);
+            Game.map.Artist.DrawSymbol(Symbol, X, Y, Color);
         }
     }
 

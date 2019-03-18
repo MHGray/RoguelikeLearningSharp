@@ -38,8 +38,8 @@ namespace SimpleGame
 		public void Clear()
 		{
 			Console.SetCursorPosition(0, 0);
-			Console.WindowWidth = _width;
-			Console.WindowHeight = _height + 2;
+			//Console.WindowWidth = Game.WIDTH;
+			//Console.WindowHeight = Game.HEIGHT+2;
 
 			string complete = "";
 
@@ -49,6 +49,7 @@ namespace SimpleGame
 				{
 					complete += ' ';
 				}
+                complete += '\n';
 			}
 
 			Console.Write(complete);

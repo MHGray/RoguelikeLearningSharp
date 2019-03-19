@@ -12,28 +12,28 @@ namespace SimpleGame
         public Enemy()
         {
             Point pos = Game.map.GetWalkableTilePos();
-            X = pos.X;
-            Y = pos.Y;
+            Pos.X = pos.X;
+            Pos.Y = pos.Y;
             Color = Color.normal;
             Symbol = '?';
         }
         
         public Enemy(int x, int y)
         {
-            X = x;
-            Y = y;
+            Pos.X = x;
+            Pos.Y = y;
             Color = Color.normal;
             Symbol = '?';
         }
 
         public Point GetPos()
         {
-            return new Point(X, Y);
+            return Pos;
         }
 
         public virtual void Draw()
         {
-            Game.map.Artist.DrawSymbol(Symbol, X, Y, Color);
+            Game.map.Artist.DrawSymbol(Symbol, Pos.X, Pos.Y, Color);
         }
 
         public virtual void Update()
@@ -61,21 +61,12 @@ namespace SimpleGame
             Point start = this.GetPos();
             Point end = Game.player.GetPos();
 
-
-
             List<Point> path = Game.aStar.Find(start, end,
                 //h
                 (Point p) =>
                 {
-                   // if (Game.map.IsTileWalkable(p))
-                   // {
-                        return Math.Abs(p.X - end.X) +
-                           Math.Abs(p.Y - end.Y);
-                  //  }
-                   // else
-                   // {
-                   //     return 999999;
-                   // }                    
+                    return Math.Abs(p.X - end.X) +
+                           Math.Abs(p.Y - end.Y);               
                 },
                 //getNeighbors
                 (Point p) =>
@@ -85,8 +76,8 @@ namespace SimpleGame
 
             if(path.Count > 1)
             {
-                X = path[1].X;
-                Y = path[1].Y;
+                Pos.X = path[1].X;
+                Pos.Y = path[1].Y;
             }
             
 
@@ -98,32 +89,32 @@ namespace SimpleGame
             switch ((Dir)Game.rng.Next(1, 10))
             {
                 case Dir.u:
-                    Y--;
+                    Pos.Y--;
                     break;
                 case Dir.ul:
-                    Y--;
-                    X--;
+                    Pos.Y--;
+                    Pos.X--;
                     break;
                 case Dir.ur:
-                    X++;
-                    Y--;
+                    Pos.X++;
+                    Pos.Y--;
                     break;
                 case Dir.l:
-                    X--;
+                    Pos.X--;
                     break;
                 case Dir.r:
-                    X++;
+                    Pos.X++;
                     break;
                 case Dir.d:
-                    Y++;
+                    Pos.Y++;
                     break;
                 case Dir.dl:
-                    Y++;
-                    X--;
+                    Pos.Y++;
+                    Pos.X--;
                     break;
                 case Dir.dr:
-                    Y++;
-                    X++;
+                    Pos.Y++;
+                    Pos.X++;
                     break;
                 case Dir.w:
                     break;
@@ -135,25 +126,25 @@ namespace SimpleGame
         public override void Update()
         {
             //Clear self on Map
-            Game.map.DrawTile(X, Y);
+            Game.map.DrawTile(Pos.X, Pos.Y);
 
             //attempt move
-            Point curPos = new Point(X, Y);
+            Point curPos = new Point(Pos.X, Pos.Y);
 
 
 
             MoveTowardsPlayer();
 
-            if(!Game.map.IsTileWalkable(X, Y))
+            if(!Game.map.IsTileWalkable(Pos.X, Pos.Y))
             {
-                X = curPos.X;
-                Y = curPos.Y;
+                Pos.X = curPos.X;
+                Pos.Y = curPos.Y;
             }
         }
 
         public override void Draw()
         {
-            Game.map.Artist.DrawSymbol(Symbol, X, Y, Color);
+            Game.map.Artist.DrawSymbol(Symbol, Pos.X, Pos.Y, Color);
         }
     }
 

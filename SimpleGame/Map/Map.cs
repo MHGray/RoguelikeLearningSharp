@@ -113,12 +113,14 @@ namespace SimpleGame
 
         Tile GetTile(Point p)
         {
-            return _tiles.Find(t => t.Pos.X == p.X && t.Pos.Y == p.Y);
+            return _tiles[p.X + (p.Y * Width)];
+            //return _tiles.Find(t => t.Pos.X == p.X && t.Pos.Y == p.Y);
         }
 
         Tile GetTile(int x, int y)
         {
-            return _tiles.Find(t => t.Pos.X == x && t.Pos.Y == y);
+            return _tiles[x + (y * Width)];
+            //return _tiles.Find(t => t.Pos.X == x && t.Pos.Y == y);
         }
 
         List<Tile> GetAdjTiles(int x, int y)

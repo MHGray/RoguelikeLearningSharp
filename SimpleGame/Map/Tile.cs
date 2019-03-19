@@ -5,9 +5,6 @@
         private char _symbol;
         private Color _color;
 
-        //public int x;
-        //public int y;
-
         public Point Pos = new Point();
 
         public char Symbol {

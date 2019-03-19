@@ -184,16 +184,16 @@ namespace SimpleGame
 
         public Point GetPos()
         {
-            return new Point(X, Y);
+            return new Point(Pos.X, Pos.Y);
         }
 
 		public void Move(string dir)
 		{
 			//Clear current position in artist
-			Game.map.DrawTile(X, Y);
+			Game.map.DrawTile(Pos.X, Pos.Y);
 
-            int moveX = X;
-            int moveY = Y;
+            int moveX = Pos.X;
+            int moveY = Pos.Y;
 
 			switch (dir)
 			{
@@ -251,20 +251,20 @@ namespace SimpleGame
             //Check to make sure position is walkable
             if (Game.map.IsTileWalkable(moveX, moveY))
             {
-                X = moveX;
-                Y = moveY;
+                Pos.X = moveX;
+                Pos.Y = moveY;
             }
 		}
 
         public void SetPos(Point pos)
         {
-            X = pos.X;
-            Y = pos.Y;
+            Pos.X = pos.X;
+            Pos.Y = pos.Y;
         }
 
 		public void Draw()
 		{
-			Game.map.Artist.DrawSymbol(Symbol, X, Y, Color);
+			Game.map.Artist.DrawSymbol(Symbol, Pos.X, Pos.Y, Color);
 		}
 	}
 }

@@ -64,6 +64,10 @@ namespace SimpleGame
 
         public void Draw()
         {
+            //TODO This currently doesn't handle messages distinctly
+            //I should probably pass a message list instead of a straight
+            //up string and then just write it out in the artist.
+            //No need to process each message twice.
             string messageBox = "";
             Messages.ForEach(m => messageBox += m );
             artist.WriteMessageBlock(messageBox);

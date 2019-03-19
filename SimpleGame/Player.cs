@@ -88,6 +88,26 @@ namespace SimpleGame
 				case ConsoleKey.Escape:
 					break;
 				case ConsoleKey.Spacebar:
+
+                    int rand = Game.rng.Next(0,4);
+
+                    switch (rand)
+                    {
+                        case 0:
+                            Game.messages.Write("I am writing messages woo and now I'm writing reaaaaaaaaaaaaally long messagessa tooo. My goodness how long they are");
+                            break;
+                        case 1:
+                            Game.messages.Write("here is a short line");
+                            break;
+                        case 2:
+                            Game.messages.Write("here is a diferent line");
+                            break;
+                        case 3:
+                            Game.messages.Write(Str);
+                            break;
+                        default:
+                            break;
+                    }
 					break;
 				case ConsoleKey.LeftArrow:
 					break;

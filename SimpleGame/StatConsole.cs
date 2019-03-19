@@ -15,7 +15,7 @@ namespace SimpleGame
         {
             Width = width;
             Height = height;
-            artist = new Artist(Width, Height, 0, 25);
+            artist = new Artist(Width, Height, 0, Game.map.Height);
         }
 
         public void Draw()

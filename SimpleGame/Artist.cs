@@ -143,7 +143,65 @@ namespace SimpleGame
             }
         }
 
-		private class Pixel
+        public void WriteMessageBlock(string str)
+        {
+            //Clear all pixels
+            //_pixels.ForEach(p => p.Symbol = ' ');
+            for (int i = 0; i < _height; i++)
+            {
+                string blanks = "";
+
+                for (int j = 0; j < _width; j++)
+                {
+                    blanks += " ";
+                }
+                blanks += "\n";
+
+                Console.SetCursorPosition(0 + _widthOff, i + _heightOff);
+                Console.Write(blanks);
+            }
+
+            List<string> strs = new List<string>();
+
+            if (str.Length > _width)
+            {
+                List<string> lines = new List<string>();
+
+                int lastSpaceInd = 0;
+
+                while (str.Length > _width)
+                {
+                    int curIndex = str.IndexOf(' ', lastSpaceInd + 1);
+
+                    if (curIndex > _width || curIndex == -1)
+                    {
+                        //break into a new str and start over
+                        strs.Add(str.Substring(0, lastSpaceInd));
+                        str = str.Substring(lastSpaceInd).TrimStart();
+                        lastSpaceInd = 0;
+                    }
+                    else
+                    {
+                        lastSpaceInd = curIndex;
+                    }
+                }
+            }
+
+            strs.Add(str);
+
+            while (strs.Count > _height)
+            {
+                strs.RemoveAt(0);
+            }
+
+            for (int i = 0; i < strs.Count; i++)
+            {
+                Console.SetCursorPosition(0 + _widthOff, i + _heightOff);
+                Console.Write(str);
+            }
+        }
+
+        private class Pixel
 		{
 			private int _x;
 			private int _y;

@@ -10,28 +10,63 @@ namespace SimpleGame
         public int Width;
         public int Height;
         public Artist artist;
+        private List<string> _messages;
+
+        private List<string> Messages {
+            get { return _messages; }
+            set {
+                _messages = value;
+                Draw();
+            }
+        }
 
         public MessageConsole(int width, int height)
         {
+            _messages = new List<string>();
             Width = width;
             Height = height;
-            artist = new Artist(Width, Height, 0, 25);
+            artist = new Artist(Width, Height, Game.map.Width, 0);
+        }
+
+        public void Write(string msg)
+        {
+            if(msg.Length > Width)
+            {
+                List<string> lines = new List<string>();
+
+                int lastSpaceInd = 0;
+
+                while (msg.Length > Width)
+                {
+                    int curIndex = msg.IndexOf(' ', lastSpaceInd + 1);
+
+                    if (curIndex > Width || curIndex == -1)
+                    {
+                        //break into a new message and start over
+                        Messages.Add(msg.Substring(0, lastSpaceInd));
+                        msg = msg.Substring(lastSpaceInd).TrimStart();
+                        lastSpaceInd = 0;
+                    }
+                    else
+                    {
+                        lastSpaceInd = curIndex;
+                    }
+                }
+            }
+
+            Messages.Add(msg);
+            while(Messages.Count > Height)
+            {
+                Messages.RemoveAt(0);
+            }
+            Draw();
         }
 
         public void Draw()
         {
-            //Line 1
-            string line1 = "";
-            line1 += "HP: " + Game.player.HP + "/" + Game.player.HPMax + "  Str: " +
-                     Game.player.Str + "  Con: " + Game.player.Con;
-            if (line1.Length > Width)
-            {
-                return;
-            }
-            artist.WriteLine(line1, 0, 0);
-            artist.Draw();
-            //Line 2
-            //Line 3
+            string messageBox = "";
+            Messages.ForEach(m => messageBox += m );
+            artist.WriteMessageBlock(messageBox);
         }
     }
 }

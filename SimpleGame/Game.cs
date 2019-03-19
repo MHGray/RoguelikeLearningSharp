@@ -14,13 +14,15 @@ namespace SimpleGame
         public static AStar aStar = new AStar();
         public static Dice dice = new Dice();
         public static StatConsole stats;
+        public static MessageConsole messages;
 
         static void Main()
 		{
             Console.WindowWidth = WIDTH;
-            Console.WindowHeight = HEIGHT;
-			map = new Map(100, 25);
-            stats = new StatConsole(100, 5);
+            Console.WindowHeight = HEIGHT+2;
+			map = new Map(80, 25);
+            stats = new StatConsole(80, 5);
+            messages = new MessageConsole(40,30);
             rng = new Random(6);
 			map.Test();
             player = new Player();

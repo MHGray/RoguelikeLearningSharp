@@ -8,31 +8,31 @@ namespace SimpleGame
 		public static Random rng;
 		public const int WIDTH = 120;
 		public const int HEIGHT = 30;
-		public static Player player;
 		public static Map map;
-        public static List<Enemy> Enemies { get; set; } = new List<Enemy>();
         public static AStar aStar = new AStar();
         public static Dice dice = new Dice();
         public static StatConsole stats;
         public static MessageConsole messages;
+        public static Stage stage;
 
         static void Main()
 		{
             Console.WindowWidth = WIDTH;
             Console.WindowHeight = HEIGHT+2;
 			map = new Map(80, 25);
+            stage = new Stage();
             stats = new StatConsole(80, 5);
             messages = new MessageConsole(40,30);
             rng = new Random(6);
 			map.Test();
-            player = new Player();
-            player.SetPos(map.GetWalkableTilePos());
-            for (int i = 0; i < 25; i++)
+            stage.Add(new Player());
+            for (int i = 0; i < 6; i++)
             {
-                Enemies.Add(new Goblin());
+                stage.Add(new Goblin());
             }
-            
-			map.Artist.Clear();
+            stage.GetPlayer().SetPos(map.GetWalkableTilePos());
+
+            map.Artist.Clear();
             stats.Draw();
 
 			Draw();
@@ -40,18 +40,15 @@ namespace SimpleGame
 
 		public static void Update()
 		{
-			ConsoleKeyInfo key = Console.ReadKey(true);
-			player.Update(key);
-            Enemies.ForEach(e => e.Update());
+            stage.Update();
+            
 			Draw();
 		}
 
 		public static void Draw()
 		{
 			map.Draw();
-            
-            Enemies.ForEach(e => e.Draw());
-            player.Draw();
+            stage.Draw();
             map.Artist.Draw();
 
 			Update();

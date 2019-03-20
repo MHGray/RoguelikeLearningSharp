@@ -45,19 +45,20 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Actor.cs" />
+    <Compile Include="Stage\Actor.cs" />
+    <Compile Include="Stage\Stage.cs" />
     <Compile Include="Artist.cs" />
     <Compile Include="Color.cs" />
     <Compile Include="Controller.cs" />
     <Compile Include="Dice.cs" />
-    <Compile Include="Enemy.cs" />
+    <Compile Include="Stage\Enemy.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="Map\Dir.cs" />
     <Compile Include="Map\Map.cs" />
     <Compile Include="Map\Tile.cs" />
     <Compile Include="MessageConsole.cs" />
     <Compile Include="Pathfinding.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Stage\Player.cs" />
     <Compile Include="Point.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StatConsole.cs" />

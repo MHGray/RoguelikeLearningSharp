@@ -9,8 +9,34 @@ namespace SimpleGame
 {
     class Enemy : Actor
     {
+        private int _hp = 3;
+
+        public override string Name { get; set; }
+
+        public override int HP {
+            get 
+            {
+                return _hp;
+            }
+            set 
+            {
+                _hp = value;
+                CheckIfDead();
+            }
+        }
+
+        private void CheckIfDead()
+        {
+            if(HP <= 0)
+            {
+                Game.stage.Remove(this);
+                Game.map.DrawTile(Pos.X, Pos.Y);
+            }
+        }
+
         public Enemy()
         {
+            Name = "Problem Naming";
             Point pos = Game.map.GetWalkableTilePos();
             Pos.X = pos.X;
             Pos.Y = pos.Y;
@@ -31,12 +57,12 @@ namespace SimpleGame
             return Pos;
         }
 
-        public virtual void Draw()
+        public override void Draw()
         {
             Game.map.Artist.DrawSymbol(Symbol, Pos.X, Pos.Y, Color);
         }
 
-        public virtual void Update()
+        public override void Update()
         {
 
         }
@@ -44,22 +70,17 @@ namespace SimpleGame
     
     class Goblin : Enemy
     {
-        public Goblin(int x, int y): base(x, y)
+        public Goblin()
         {
+            Name = "Goblin";
             Color = Color.goblin;
             Symbol = 'g';
         }
 
-        public Goblin(): base()
+        public Point MoveTowardsPlayer()
         {
-            Color = Color.goblin;
-            Symbol = 'g';
-        }
-
-        public void MoveTowardsPlayer()
-        {
-            Point start = this.GetPos();
-            Point end = Game.player.GetPos();
+            Point start = GetPos();
+            Point end = Game.stage.GetPlayer().GetPos();
 
             List<Point> path = Game.aStar.Find(start, end,
                 //h
@@ -74,13 +95,15 @@ namespace SimpleGame
                     return Game.map.GetAdjPoints(p);
                 });
 
+            Point nextPos = new Point();
+
             if(path.Count > 1)
             {
-                Pos.X = path[1].X;
-                Pos.Y = path[1].Y;
+                nextPos.X = path[1].X;
+                nextPos.Y = path[1].Y;
             }
             
-            return;
+            return nextPos;
         }
 
         public void RandomMove()
@@ -128,17 +151,22 @@ namespace SimpleGame
             Game.map.DrawTile(Pos.X, Pos.Y);
 
             //attempt move
-            Point curPos = new Point(Pos.X, Pos.Y);
+            Point attemptedMove = MoveTowardsPlayer();
 
-
-
-            MoveTowardsPlayer();
-
-            if(!Game.map.IsTileWalkable(Pos.X, Pos.Y))
+            if (Game.stage.IsPosOccupied(attemptedMove))
             {
-                Pos.X = curPos.X;
-                Pos.Y = curPos.Y;
+                if(Game.stage.GetPlayer().Pos.X == attemptedMove.X && Game.stage.GetPlayer().Pos.Y == attemptedMove.Y)
+                {
+                    Fight(Game.stage.GetPlayer());
+                }
+                return;
             }
+            else
+            {
+               Pos.X = attemptedMove.X;
+               Pos.Y = attemptedMove.Y;
+            }
+
         }
 
         public override void Draw()

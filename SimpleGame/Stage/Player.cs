@@ -6,31 +6,32 @@ namespace SimpleGame
 	{
         private int _hp = 0;
         private int _hpMax = 0;
-        private string _str = "1d6";
+        private string _str = "1d6+4";
         private string _con = "1d2";
+        public override string Name { get; set; }
 
-        public new int HP {
+        public override int HP {
             get { return _hp; }
             set {
                 _hp = value;
                 Game.stats.Draw();
             }
         }
-        public new int HPMax {
+        public override int HPMax {
             get { return _hpMax; }
             set {
                 _hpMax = value;
                 Game.stats.Draw();
             }
         }
-        public new string Con {
+        public override string Con {
             get { return _con; }
             set {
                 _con = value;
                 Game.stats.Draw();
             }
         }
-        public new string Str {
+        public override string Str {
             get { return _str; }
             set {
                 _str = value;
@@ -40,15 +41,21 @@ namespace SimpleGame
 
         public Player()
         {
+            Name = "Player";
             Symbol = '@';
             Color = Color.player;
             _hp = 8;
             _hpMax = 8;
         }
 
-		public void Update(ConsoleKeyInfo input)
+        
+
+        public override void Update()
 		{
-			switch (input.Key)
+
+			ConsoleKeyInfo input = Console.ReadKey(true);
+
+            switch (input.Key)
 			{
 				case ConsoleKey.NumPad0:
 					break;
@@ -268,11 +275,20 @@ namespace SimpleGame
 				moveY = Game.map.Height - 1;
 			}
 
+            Point attempt = new Point(moveX, moveY);
             //Check to make sure position is walkable
-            if (Game.map.IsTileWalkable(moveX, moveY))
+            if (Game.map.IsTileWalkable(moveX, moveY) && !Game.stage.IsPosOccupied(attempt))
             {
                 Pos.X = moveX;
                 Pos.Y = moveY;
+            }
+            else if (Game.stage.IsPosOccupied(attempt))
+            {
+                Actor target = Game.stage.GetActor(attempt);
+                if(target != this)
+                {
+                    Fight(target);
+                }
             }
 		}
 
@@ -282,7 +298,7 @@ namespace SimpleGame
             Pos.Y = pos.Y;
         }
 
-		public void Draw()
+		public override void Draw()
 		{
 			Game.map.Artist.DrawSymbol(Symbol, Pos.X, Pos.Y, Color);
 		}

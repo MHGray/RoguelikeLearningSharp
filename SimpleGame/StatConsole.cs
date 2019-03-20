@@ -22,8 +22,8 @@ namespace SimpleGame
         {
             //Line 1
             string line1 = "";
-            line1 += "HP: " + Game.player.HP + "/" + Game.player.HPMax + "  Str: " +
-                     Game.player.Str + "  Con: " + Game.player.Con;
+            line1 += "HP: " + Game.stage.GetPlayer().HP + "/" + Game.stage.GetPlayer().HPMax + "  Str: " +
+                     Game.stage.GetPlayer().Str + "  Con: " + Game.stage.GetPlayer().Con;
             if(line1.Length > Width)
             {
                 return;

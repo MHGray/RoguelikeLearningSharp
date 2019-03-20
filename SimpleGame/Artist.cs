@@ -51,29 +51,23 @@ namespace SimpleGame
         #endregion
 
         /// <summary>
-        /// Completely clears the screen. Inefficient and causes screen flickering
-        /// if it is done a lot.
+        /// Completely clears the screen. 
         /// </summary>
         public void Clear()
 		{
-			Console.SetCursorPosition(0, 0);
-			//Console.WindowWidth = Game.WIDTH;
-			//Console.WindowHeight = Game.HEIGHT+2;
+            for (int i = 0; i < _height; i++)
+            {
+                string blanks = "";
 
-			string complete = "";
+                for (int j = 0; j < _width; j++)
+                {
+                    blanks += " ";
+                }
 
-			for (int j = 0; j < _height; j++)
-			{
-				for (int i = 0; i < _width; i++)
-				{
-					complete += ' ';
-				}
-                complete += '\n';
-			}
-
-			Console.Write(complete);
-			Console.SetWindowPosition(0, 0);
-		}
+                Console.SetCursorPosition(0 + _widthOff, i + _heightOff);
+                Console.Write(blanks);
+            }
+        }
 
 
 		public void DrawRectFill(char symbol, int x, int y, int width, int height, Color color)
@@ -143,61 +137,16 @@ namespace SimpleGame
             }
         }
 
-        public void WriteMessageBlock(string str)
+        public void WriteMessageBlock(List<string> strs)
         {
-            //Clear all pixels
-            //_pixels.ForEach(p => p.Symbol = ' ');
-            for (int i = 0; i < _height; i++)
-            {
-                string blanks = "";
-
-                for (int j = 0; j < _width; j++)
-                {
-                    blanks += " ";
-                }
-                blanks += "\n";
-
-                Console.SetCursorPosition(0 + _widthOff, i + _heightOff);
-                Console.Write(blanks);
-            }
-
-            List<string> strs = new List<string>();
-
-            if (str.Length > _width)
-            {
-                List<string> lines = new List<string>();
-
-                int lastSpaceInd = 0;
-
-                while (str.Length > _width)
-                {
-                    int curIndex = str.IndexOf(' ', lastSpaceInd + 1);
-
-                    if (curIndex > _width || curIndex == -1)
-                    {
-                        //break into a new str and start over
-                        strs.Add(str.Substring(0, lastSpaceInd));
-                        str = str.Substring(lastSpaceInd).TrimStart();
-                        lastSpaceInd = 0;
-                    }
-                    else
-                    {
-                        lastSpaceInd = curIndex;
-                    }
-                }
-            }
-
-            strs.Add(str);
-
-            while (strs.Count > _height)
-            {
-                strs.RemoveAt(0);
-            }
-
+            //Clear the screen
+            SetColor(Color.normal);
+            Clear();
+               
             for (int i = 0; i < strs.Count; i++)
             {
                 Console.SetCursorPosition(0 + _widthOff, i + _heightOff);
-                Console.Write(str);
+                Console.Write(strs[i]);
             }
         }
 

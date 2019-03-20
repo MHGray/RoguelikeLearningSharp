@@ -10,19 +10,11 @@ namespace SimpleGame
         public int Width;
         public int Height;
         public Artist artist;
-        private List<string> _messages;
-
-        private List<string> Messages {
-            get { return _messages; }
-            set {
-                _messages = value;
-                Draw();
-            }
-        }
+        private List<string> Messages;
 
         public MessageConsole(int width, int height)
         {
-            _messages = new List<string>();
+            Messages = new List<string>();
             Width = width;
             Height = height;
             artist = new Artist(Width, Height, Game.map.Width, 0);
@@ -64,13 +56,7 @@ namespace SimpleGame
 
         public void Draw()
         {
-            //TODO This currently doesn't handle messages distinctly
-            //I should probably pass a message list instead of a straight
-            //up string and then just write it out in the artist.
-            //No need to process each message twice.
-            string messageBox = "";
-            Messages.ForEach(m => messageBox += m );
-            artist.WriteMessageBlock(messageBox);
+            artist.WriteMessageBlock(Messages);
         }
     }
 }

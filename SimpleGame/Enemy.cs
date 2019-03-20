@@ -80,7 +80,6 @@ namespace SimpleGame
                 Pos.Y = path[1].Y;
             }
             
-
             return;
         }
 

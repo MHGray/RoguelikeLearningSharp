@@ -10,14 +10,12 @@ namespace SimpleGame
 
     class AStar{
 
-        public List<Point> Find(Point pStart, Point pEnd, Func<Point,int> h, Func<Point, List<Point>> getNeighbors)
+        public List<Point> Find(Point start, Point end, Func<Point,Point,int> h, Func<Point, List<Point>> getNeighbors)
         {
             //List<Point> finalPath = new List<Point>();
-
-            Point start = new Point(pStart);
-            start.H = h(start);
+            start.H = h(start,end);
             start.G = start.H +start.G;
-            Point end = new Point(pEnd);
+            
 
             List<Point> openList = new List<Point>();
             List<Point> closedList = new List<Point>();
@@ -73,7 +71,7 @@ namespace SimpleGame
                     if (! (openList.Exists(q => q.X == neighbor.X && q.Y == neighbor.Y)))
                     {
                         isBestG = true;
-                        neighbor.H = h(neighbor);
+                        neighbor.H = h(neighbor,end);
                         neighbor.G = gScore;
                         neighbor.F = neighbor.G + neighbor.H;
                         openList.Add(neighbor);

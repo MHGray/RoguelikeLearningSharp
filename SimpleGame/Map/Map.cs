@@ -81,7 +81,6 @@ namespace SimpleGame
                 default:
                     break;
             }
-
         }
 
         public bool IsTileWalkable(int x, int y)
@@ -108,7 +107,6 @@ namespace SimpleGame
             Tile selectedTile = tiles[Game.rng.Next(tiles.Count)];
             Point point = new Point(selectedTile.Pos.X, selectedTile.Pos.Y);
             return point;
-
         }
 
         Tile GetTile(Point p)
@@ -183,7 +181,6 @@ namespace SimpleGame
                 Point end = new Point(endX, endY);
                 _hallways.Add(new Hallway(start, end));
             }
-
         }
 
         /// <summary>
@@ -224,7 +221,6 @@ namespace SimpleGame
                     }
                     counter++;
                 }
-
             }
         }
 
@@ -235,7 +231,6 @@ namespace SimpleGame
         /// <returns></returns>
 		private bool IsRoomOverlapping(Room room)
         {
-
             if (Game.map._rooms.Count > 0)
             {
                 foreach (Room real in _rooms)
@@ -329,8 +324,7 @@ namespace SimpleGame
                 _yEnd = end[1];
                 Init();
             }
-
-
+            
             private void Init()
             {
                 _vertFirst = true;
@@ -443,7 +437,5 @@ namespace SimpleGame
                 }
             }
         }
-        
     }
-
 }

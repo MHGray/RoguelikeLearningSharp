@@ -48,8 +48,6 @@ namespace SimpleGame
             _hpMax = 8;
         }
 
-        
-
         public override void Update()
 		{
 

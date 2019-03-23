@@ -13,7 +13,8 @@ namespace SimpleGame
 
         public override string Name { get; set; }
 
-        public override int HP {
+        public override int HP 
+        {
             get 
             {
                 return _hp;

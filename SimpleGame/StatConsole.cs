@@ -30,9 +30,6 @@ namespace SimpleGame
             }
             artist.WriteLine(line1, 0, 0);
             artist.Draw();
-            //Line 2
-            //Line 3
         }
-
     }
 }

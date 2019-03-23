@@ -5,7 +5,7 @@ namespace SimpleGame
 {
     class Dice
     {
-        private Random _rng { get;set; } = new Random();
+        private Random _rng { get; set; } = new Random();
 
         public int Roll(string diceNotation)
         {
@@ -30,7 +30,8 @@ namespace SimpleGame
                 if (value.StartsWith("+"))
                 {
                     value = value.Remove(0, 1);
-                }else if (value.StartsWith("-"))
+                }
+                else if (value.StartsWith("-"))
                 {
                     adding = false;
                     value = value.Remove(0, 1);
@@ -78,7 +79,7 @@ namespace SimpleGame
             return total;
         }
 
-        
+
 
         int RollDie(int num, int value)
         {
@@ -86,15 +87,13 @@ namespace SimpleGame
             for (int i = 0; i < num; i++)
             {
                 int roll = _rng.Next(1, value + 1);
-                if(roll == value)
+                if (roll == value)
                 {
                     roll += (RollDie(1, value));
                 }
                 total += roll;
-
             }
             return total;
         }
-
     }
 }

@@ -78,23 +78,17 @@ namespace SimpleGame
             Symbol = 'g';
         }
 
+        private static int PathfindingHeuristic(Point p, Point end)
+        {
+            return Math.Abs(p.X - end.X) + Math.Abs(p.Y - end.Y);
+        }
+
         public Point MoveTowardsPlayer()
         {
             Point start = GetPos();
             Point end = Game.stage.GetPlayer().GetPos();
 
-            List<Point> path = Game.aStar.Find(start, end,
-                //h
-                (Point p) =>
-                {
-                    return Math.Abs(p.X - end.X) +
-                           Math.Abs(p.Y - end.Y);               
-                },
-                //getNeighbors
-                (Point p) =>
-                {                    
-                    return Game.map.GetAdjPoints(p);
-                });
+            List<Point> path = Game.aStar.Find(start, end, PathfindingHeuristic, Game.map.GetAdjPoints);
 
             Point nextPos = new Point();
 

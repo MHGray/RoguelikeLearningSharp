@@ -79,8 +79,6 @@ namespace SimpleGame
             return total;
         }
 
-
-
         int RollDie(int num, int value)
         {
             int total = 0;

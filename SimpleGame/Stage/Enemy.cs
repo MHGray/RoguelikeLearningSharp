@@ -161,7 +161,6 @@ namespace SimpleGame
                Pos.X = attemptedMove.X;
                Pos.Y = attemptedMove.Y;
             }
-
         }
 
         public override void Draw()

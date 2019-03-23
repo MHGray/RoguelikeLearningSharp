@@ -88,8 +88,6 @@ namespace SimpleGame
             }
 
             return null;
-
         }
-
     }
 }

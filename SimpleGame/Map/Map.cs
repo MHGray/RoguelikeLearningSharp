@@ -224,11 +224,6 @@ namespace SimpleGame
             }
         }
 
-        /// <summary>
-        /// Check if room overlaps with another room
-        /// </summary>
-        /// <param name="room"></param>
-        /// <returns></returns>
 		private bool IsRoomOverlapping(Room room)
         {
             if (Game.map._rooms.Count > 0)
@@ -246,10 +241,7 @@ namespace SimpleGame
             }
             return false;
         }
-
-        /// <summary>
-        /// Create a room and set the map tiles to be the correct things
-        /// </summary>
+        
 		class Room
         {
             public int X;
@@ -283,12 +275,8 @@ namespace SimpleGame
                     }
                 }
             }
-
         }
-
-        /// <summary>
-        /// Connects two points and stores the start and end point
-        /// </summary>
+        
 		class Hallway
         {
             private readonly int _xStart;
@@ -296,12 +284,7 @@ namespace SimpleGame
             private readonly int _xEnd;
             private readonly int _yEnd;
             private bool _vertFirst { get; set; }
-
-            /// <summary>
-            /// construct with points
-            /// </summary>
-            /// <param name="start">Point</param>
-            /// <param name="end">Point</param>
+            
 			public Hallway(Point start, Point end)
             {
                 _xStart = start.X;
@@ -311,11 +294,6 @@ namespace SimpleGame
                 Init();
             }
 
-            /// <summary>
-            /// Construct with 2 length array
-            /// </summary>
-            /// <param name="start">2 length int array</param>
-            /// <param name="end">2 length int array</param>
             public Hallway(int[] start, int[] end)
             {
                 _xStart = start[0];
@@ -427,7 +405,6 @@ namespace SimpleGame
                             {
                                 Game.map.SetTile(_xStart - i, _yEnd - 1, TileType.Wall);
                             }
-
                         }
                     }
                 }
